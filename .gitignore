@@ -1,2 +1,4 @@
 *.pdf
 !plan.pdf
+
+.DS_Store
