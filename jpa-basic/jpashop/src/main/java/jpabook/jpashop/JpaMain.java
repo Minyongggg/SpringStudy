@@ -1,6 +1,8 @@
 package jpabook.jpashop;
 
 import javax.persistence.*;
+import jpabook.jpashop.domain.Book;
+import jpabook.jpashop.domain.Member;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -11,6 +13,14 @@ public class JpaMain {
         tx.begin();
 
         try {
+
+            Book book = new Book();
+            book.setName("JPA");
+            book.setIsbn("1234");
+            book.setAuthor("김영한");
+
+            em.persist(book);
+
 
             tx.commit();
         } catch (Exception e) {

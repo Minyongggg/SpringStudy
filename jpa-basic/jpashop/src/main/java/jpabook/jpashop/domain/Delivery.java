@@ -1,20 +1,30 @@
 package jpabook.jpashop.domain;
 
+import static javax.persistence.FetchType.LAZY;
+
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-public class Delivery {
+@Getter
+@Setter
+public class Delivery extends BaseEntity {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String city;
-    private String street;
-    private String zipcode;
-    private DeliveryStatus status; // READY, COMP
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
+    private Order order;
 
+    @Embedded
+    private Address address;
+
+    private DeliveryStatus status;
 }
