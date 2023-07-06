@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository;
+package jpabook.jpashop.repository.order;
 
 import java.util.List;
 import jpabook.jpashop.domain.Order;
@@ -9,4 +9,5 @@ public interface OrderRepository extends JpaRepository<Order, Long>, CustomOrder
 
     @Query("select o from Order o join fetch o.member m join fetch o.delivery d")
     List<Order> findAllWithMemberDelivery();
+
 }

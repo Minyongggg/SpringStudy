@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.OrderStatus;
-import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.order.OrderRepository;
 import jpabook.jpashop.domain.Order;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

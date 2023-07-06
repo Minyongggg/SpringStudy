@@ -1,17 +1,14 @@
-package jpabook.jpashop.repository;
+package jpabook.jpashop.repository.order;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
-import javax.persistence.EntityManager;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.domain.QMember;
 import jpabook.jpashop.domain.QOrder;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 @RequiredArgsConstructor
