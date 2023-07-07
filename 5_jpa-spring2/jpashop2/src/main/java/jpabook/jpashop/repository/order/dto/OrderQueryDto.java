@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository.order.query;
+package jpabook.jpashop.repository.order.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -10,7 +10,7 @@ import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.exception.NotEnoughStockExeption;
-import jpabook.jpashop.repository.order.OrderRepositoryOld;
+import jpabook.jpashop.repository.order.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ class OrderServiceTest {
     @Autowired EntityManager em;
     @Autowired OrderService orderService;
     @Autowired
-    OrderRepositoryOld orderRepository;
+    OrderRepository orderRepository;
 
     @Test
     @DisplayName("상품주문")
@@ -40,7 +40,7 @@ class OrderServiceTest {
         Long orderId = orderService.order(member.getId(), item.getId(), orderCount);
 
         //then
-        Order order = orderRepository.findOne(orderId);
+        Order order = orderRepository.findById(orderId).get();
 
         assertEquals(order.getStatus(), OrderStatus.ORDER, "상품 주문 시 상태는 ORDER");
         assertEquals(order.getOrderItems().size(), 1, "주문한 상품 종류 수가 정확해야 한다.");

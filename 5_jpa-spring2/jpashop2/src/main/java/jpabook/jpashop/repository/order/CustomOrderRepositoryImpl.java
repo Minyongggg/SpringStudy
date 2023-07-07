@@ -1,12 +1,17 @@
 package jpabook.jpashop.repository.order;
 
+import static jpabook.jpashop.domain.QDelivery.delivery;
+import static jpabook.jpashop.domain.QMember.member;
+import static jpabook.jpashop.domain.QOrder.order;
+import static jpabook.jpashop.domain.QOrderItem.orderItem;
+import static jpabook.jpashop.domain.item.QItem.item;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
-import jpabook.jpashop.domain.QMember;
-import jpabook.jpashop.domain.QOrder;
+import jpabook.jpashop.repository.order.dto.OrderSearchDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -17,10 +22,7 @@ public class CustomOrderRepositoryImpl implements CustomOrderRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Order> findAll(OrderSearch orderSearch) {
-
-        QOrder order = QOrder.order;
-        QMember member = QMember.member;
+    public List<Order> findAll(OrderSearchDto orderSearch) {
 
         return queryFactory
             .select(order)
@@ -34,13 +36,44 @@ public class CustomOrderRepositoryImpl implements CustomOrderRepository {
         if (status == null) {
             return null;
         }
-        return QOrder.order.status.eq(status);
+        return order.status.eq(status);
     }
 
     private static BooleanExpression nameLike(String memberName) {
         if (!StringUtils.hasText(memberName)) {
             return null;
         }
-        return QMember.member.name.like(memberName);
+        return member.name.like(memberName);
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+
+        return queryFactory
+            .select(order)
+            .from(order)
+            .join(order.member, member)
+            .fetchJoin()
+            .join(order.delivery, delivery)
+            .fetchJoin()
+            .offset(offset)
+            .limit(limit)
+            .fetch();
+    }
+
+    public List<Order> findAllWithItem() {
+
+        return queryFactory
+            .select(order)
+            .from(order)
+            .join(order.member, member)
+            .fetchJoin()
+            .join(order.delivery, delivery)
+            .fetchJoin()
+            .join(order.orderItems, orderItem)
+            .fetchJoin()
+            .join(orderItem.item, item)
+            .fetchJoin()
+            .distinct()
+            .fetch();
     }
 }

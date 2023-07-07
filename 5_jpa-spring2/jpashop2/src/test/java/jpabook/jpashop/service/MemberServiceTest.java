@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import javax.transaction.Transactional;
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepositoryOld;
+import jpabook.jpashop.repository.member.MemberRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class MemberServiceTest {
 
     @Autowired MemberService memberService;
     @Autowired
-    MemberRepositoryOld memberRepository;
+    MemberRepository memberRepository;
 
     @Test
     @DisplayName("회원가입")
@@ -30,7 +30,7 @@ class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepository.findById(savedId).get());
     }
 
     @Test

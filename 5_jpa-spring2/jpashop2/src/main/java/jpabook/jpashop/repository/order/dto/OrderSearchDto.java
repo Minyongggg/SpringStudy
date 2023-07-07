@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository.order;
+package jpabook.jpashop.repository.order.dto;
 
 import jpabook.jpashop.domain.OrderStatus;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderSearch {
+public class OrderSearchDto {
 
     private String memberName;
     private OrderStatus orderStatus;

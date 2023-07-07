@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository.order.simplequery;
+package jpabook.jpashop.repository.order.dto;
 
 import java.time.LocalDateTime;
 import jpabook.jpashop.domain.Address;
