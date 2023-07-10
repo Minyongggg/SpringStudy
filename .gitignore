@@ -2,6 +2,8 @@
 !plan.pdf
 *.txt
 
+.idea
+
 springmvc1-v2020-03-08
 jpashop-v20210728
 jpashop2-api-v20210805
